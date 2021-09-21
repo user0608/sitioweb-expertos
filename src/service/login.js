@@ -5,7 +5,6 @@ export const postDataAPelo = async (data, path) => {
     headers: {
       'Content-Type': 'application/json'
     },
-    referrerPolicy: 'unsafe-url',
     body: JSON.stringify(data)
   });
   return response.json();

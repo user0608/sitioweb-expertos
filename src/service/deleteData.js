@@ -5,8 +5,7 @@ export const deleteData = async (path) => {
         headers: {
           'Content-Type': 'application/json',
           'Authorization': localStorage.getItem("token")         
-        },
-        referrerPolicy: 'unsafe-url'
+        }
     });
     return response.json(); 
 }

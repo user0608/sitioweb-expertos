@@ -6,7 +6,6 @@ export const postData = async (data, path) => {
       'Content-Type': 'application/json',
       'Authorization': localStorage.getItem("token")
     },
-    referrerPolicy: 'unsafe-url',
     body: JSON.stringify(data)
   });
   return response.json();
