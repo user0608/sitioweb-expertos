@@ -10,6 +10,7 @@ import { Home } from './page/Home';
 import { CasmPage } from "./page/CasmPage";
 import { BergerPage } from "./page/BergerPage";
 import { HeaPage } from "./page/HeaPage";
+import Resultados from "./page/Resultados";
 
 const App = () => {
   const token = useToken()
@@ -39,6 +40,9 @@ const WebPage = () => {
           </Route>
           <Route path="/test/:test_id/hea">
             < HeaPage />
+          </Route>
+          <Route path="/resultado/:test_id">
+            < Resultados />
           </Route>
         </Switch>
       </div>

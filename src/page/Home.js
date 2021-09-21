@@ -34,7 +34,7 @@ export const Home = () => {
             }
         }
     }
-    const onCrearTest = async () => {        
+    const onCrearTest = async () => {
         let data = await GetData("prueba/create")
         console.log(data)
         if (data.code != "OK") {
@@ -43,9 +43,7 @@ export const Home = () => {
         }
         loadData()
     }
-    const IniciarCASM = () => {
-
-    }
+    
     useEffect(() => {
         loadData()
     }, [])
@@ -103,7 +101,9 @@ export const Home = () => {
                                     </td>
                                     {u.done ?
                                         <>
-                                            <td><button>Resultados</button></td>
+                                            <td><Link
+                                                to={`resultado/${u.test_id}`}
+                                                className="btn btn-primary">resultado</Link></td>
                                         </>
                                         :
                                         <>

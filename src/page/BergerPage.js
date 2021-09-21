@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { BergerQuestion } from "../components/BergerQuestion";
-import { CasmQuestion } from "../components/CasmQuestion";
 import { GetData } from "../service/getData";
 import { postData } from "../service/postData";
 
