@@ -59,6 +59,9 @@ export const Home = () => {
             <div className="container-image">
                 <img max-height="200"  src="/banner.png" />
             </div>
+            <h1>
+                SISTEMA EXPERTO PARA EL COLEGIO CONSUELO SOLANO DE VILLON 80880
+            </h1>
             <div className="d-flex justify-content-end">
                 <button
                     className="me-2"
