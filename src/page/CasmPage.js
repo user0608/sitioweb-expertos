@@ -77,6 +77,9 @@ export const CasmPage = () => {
             <div className="p-5 d-flex justify-content-center ">
                 <button className="btn btn-primary btn-bg" onClick={saveAs}>Guardar Respuestas</button>
             </div>
+            {Paginas(setPage)}
+            <br/>
+            <br/>
         </div>
     )
 }
