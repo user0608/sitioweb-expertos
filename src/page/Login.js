@@ -1,8 +1,10 @@
 import { useHistory } from 'react-router-dom';
 import useForm from '../hook/useForm';
-import { postDataAPelo } from '../service/login';
+import { postData } from '../service/login';
 
 export const Login = () => {
+    const history = useHistory();
+    console.log(history)
     const [form, handlerChange, reset] = useForm({
         username: "",
         password: ""
@@ -10,12 +12,15 @@ export const Login = () => {
     const onSubmit = async (e) => {
         e.preventDefault()
         if (form.username.length > 6 && form.password.length > 6) {
-            let response = await postDataAPelo(form, "login")
+            let response = await postData(form, "login")
+            console.log(response)
             if (response.code === "OK") {
                 localStorage.setItem("token", response.token)
                 localStorage.setItem("usuario_id", response.usuario.estudiante_id)
                 localStorage.setItem("usuario", JSON.stringify(response.usuario))
+                history.push("/")
             }
+
         } else {
             alert("datos Incorrectos")
             reset()
@@ -28,7 +33,7 @@ export const Login = () => {
                 <div className="col-4"></div>
                 <div className="col-4">
                     <h1 className="text-center">Login</h1>
-                    <form className="mt-5" onSubmit={onSubmit} action="/home" method="post">
+                    <form className="mt-5" onSubmit={onSubmit} >
                         <div className="mb-3">
                             <label className="form-label">Username</label>
                             <input

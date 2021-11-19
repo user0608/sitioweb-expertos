@@ -3,9 +3,10 @@ import { deleteData } from '../service/deleteData';
 import { GetData } from '../service/getData';
 import { Link } from "react-router-dom";
 import '../css/global.css'
+import Button from '../components/Button';
 export const Home = () => {
     const [user, setUser] = useState()
-    let u = JSON.parse(localStorage.getItem("usuario"))
+    
     const loadData = async () => {
         let data = await GetData("prueba")
         if (data.code != "OK") {
@@ -50,12 +51,7 @@ export const Home = () => {
     }, [])
     return (
         <div className="container">
-            <div >
-                <p className="text-end">
-                    <span className="h6 me-3">Usuario:</span>
-                    {u?.nombre} {u?.apellido_paterno} {u?.apellido_materno}
-                </p>
-            </div>
+            
             <div className="container-image">
                 <img max-height="200"  src="/banner.png" />
             </div>
@@ -63,10 +59,10 @@ export const Home = () => {
                 SISTEMA EXPERTO PARA EL COLEGIO CONSUELO SOLANO DE VILLON 80880
             </h1>
             <div className="d-flex justify-content-end">
-                <button
+                <Button
                     className="me-2"
                     onClick={onCrearTest}
-                >Crear nuevo test</button>
+                >Crear nuevo test</Button>
             </div>
             <div class="table-responsive-md">
                 <table className="table table table-sm">
