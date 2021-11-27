@@ -1,4 +1,4 @@
-import { useHistory  } from 'react-router-dom';
+import { useNavigate   } from 'react-router-dom';
 import useForm from '../hook/useForm';
 import {useToken} from '../hook/useToken';
 
@@ -6,8 +6,8 @@ import { postData } from '../service/login';
 import {useState,useEffect} from 'react'
 const Login = ()  => {
     const [responseServer, setResponseServer] = useState("")
-    const history = useHistory();
-    console.log("useHistory", history)
+    const navigate  = useNavigate ();
+    console.log("useHistory", navigate )
 
     const k =  useToken();
     const [form, handlerChange, reset] = useForm({
@@ -26,7 +26,7 @@ const Login = ()  => {
                 localStorage.setItem("token", response.token)
                 localStorage.setItem("usuario_id", response.usuario.estudiante_id)
                 localStorage.setItem("usuario", JSON.stringify(response.usuario))
-                history.push("/home")
+                navigate("/")
             }
 
         } else {
@@ -39,7 +39,7 @@ const Login = ()  => {
     const redirectToHome=()=>{
         if (k) {
             console.log("vaya al inicio")
-            history.push("/")
+            navigate("/")
         }else{
             console.log("que pasa",k);
         }

@@ -3,7 +3,7 @@ import ButtonLink from "../../components/ButtonLink";
 import Button from "../../components/Button";
 import {useToken} from '../../hook/useToken'
 import { useUser } from '../../hook/useUser'
-import { useHistory } from 'react-router-dom';
+import { useNavigate  } from 'react-router-dom';
 import { useEffect } from 'react';
 
 import { header, username,cerrarsesion } from "./layout.module.css"
@@ -11,13 +11,13 @@ import { header, username,cerrarsesion } from "./layout.module.css"
 const Layout = ({ children }) => {
     const k = useToken();
     const u = useUser();
-    const history = useHistory();    
+    const navigate = useNavigate ();    
 
     const removeStorage = () =>{
         localStorage.removeItem("token");
         localStorage.removeItem("usuario_id");
         localStorage.removeItem("usuario");
-        history.push("/login")
+        navigate("/login")
     }
 
     const getDataUser=()=>{

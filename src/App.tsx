@@ -1,5 +1,6 @@
 import {
   BrowserRouter as Router,
+  Routes,
   Route,
   useNavigate
 } from "react-router-dom";
@@ -17,50 +18,41 @@ import { useEffect } from "react";
 const App = () => {
   const token = useToken();
 
-/*   const navigate = useNavigate();
+  /* const navigate = useNavigate();
   console.log("useHistory", navigate) */
   useEffect(() => {
-    
+
 
   }, [token])
 
-  if (!token) {
+  /* if (!token) {
     return (
-    <Router>
-      <Route path="/login">
-          < Login />
-      </Route>
-    </Router>
+      <Router>
+        <Routes>
+          <Route path="/login2" element={< Login />} />
+        </Routes>
+      </Router>
     )
-  }
+  } */
 
   return (
-    
+
     <Router>
       <Layout>
-      <Route path="/login">
-        < Login />
-      </Route>
-      <Route path="/test/:test_id/casm">
-        < CasmPage />
-      </Route>
-      <Route path="/test/:test_id/berger">
-        < BergerPage />
-      </Route>
-      <Route path="/test/:test_id/hea">
-        < HeaPage />
-      </Route>
-      <Route path="/resultado/:test_id">
-        < Resultados />
-      </Route>
-      <Route path="/home">
-        <Home />
-      </Route>
-    </Layout>
+      <Routes>
+
+            <Route path="/" element={<Home />} />
+            <Route path="login" element={< Login />} />
+            <Route path="test/:test_id/casm" element={< CasmPage />} />
+            <Route path="test/:test_id/berger" element={< BergerPage />} />
+            <Route path="test/:test_id/hea" element={< HeaPage />} />
+            <Route path="resultado/:test_id" element={< Resultados />} />
+
+      </Routes></Layout>
     </Router>
 
-  );
+        );
 }
 
 
-export default App
+        export default App
