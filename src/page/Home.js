@@ -4,6 +4,7 @@ import { GetData } from '../service/getData';
 import { Link } from "react-router-dom";
 import '../css/global.css'
 import Button from '../components/Button';
+import ButtonLink from '../components/ButtonLink';
 export const Home = () => {
     const [user, setUser] = useState()
     
@@ -58,9 +59,9 @@ export const Home = () => {
             <h1>
                 SISTEMA EXPERTO PARA EL COLEGIO CONSUELO SOLANO DE VILLON 80880
             </h1>
-            <div className="d-flex justify-content-end">
+            <div className="d-flex justify-content-end mb-4">
                 <Button
-                    className="me-2"
+                    className="mb-2"
                     onClick={onCrearTest}
                 >Crear nuevo test</Button>
             </div>
@@ -85,17 +86,17 @@ export const Home = () => {
                                     <td>{u.created_at}</td>
                                     <td>
                                         {!u.resultado_casm &&
-                                            <Link to={`test/${u.test_id}/casm`}>Start</Link>
+                                            <ButtonLink src={`test/${u.test_id}/casm`}>Start</ButtonLink>
                                         }
                                     </td>
                                     <td>
                                         {!u.resultado_berger &&
-                                            <Link to={`test/${u.test_id}/berger`}>Start</Link>
+                                            <ButtonLink src={`test/${u.test_id}/berger`}>Start</ButtonLink>
                                         }
                                     </td>
                                     <td>
                                         {!u.resultado_hea &&
-                                            <Link to={`test/${u.test_id}/hea`}>Start</Link>
+                                            <ButtonLink src={`test/${u.test_id}/hea`}>Start</ButtonLink>
                                         }
                                     </td>
                                     {u.done ?

@@ -1,14 +1,32 @@
 import { Link } from "react-router-dom";
 import ButtonLink from "../../components/ButtonLink";
+import Button from "../../components/Button";
+import {useToken} from '../../hook/useToken'
+import { useUser } from '../../hook/useUser'
+import { useHistory } from 'react-router-dom';
+import { useEffect } from 'react';
 
 import { header, username,cerrarsesion } from "./layout.module.css"
 
 const Layout = ({ children }) => {
-    let u = JSON.parse(localStorage.getItem("usuario"))
+    const k = useToken();
+    const u = useUser();
+    const history = useHistory();    
+
     const removeStorage = () =>{
-        console.log("vaciar")
         localStorage.removeItem("token");
+        localStorage.removeItem("usuario_id");
+        localStorage.removeItem("usuario");
+        history.push("/login")
     }
+
+    const getDataUser=()=>{
+        
+    }
+
+    useEffect(() => {
+
+    }, [k,u])
 
     return (
         <>
@@ -16,17 +34,16 @@ const Layout = ({ children }) => {
                 <Link className="" to="/" >
                     <img src="/logo64.png" />
                 </Link>
-
-                {u
-                    ?
-                    <><span className={username}>
-                        {u?.nombre} {u?.apellido_paterno} {u?.apellido_materno}
-                    </span>
-                        <ButtonLink onclick={removeStorage} className={cerrarsesion} src="login"> Cerrar sesión</ButtonLink>
-                    </>
+                {k?k:"no hay token"}
+                {   u &&
+                        <span className={username}>
+                            {u?.nombre} {u?.apellido_paterno} {u?.apellido_materno}
+                        </span>
+                }
+                {k
+                    ? <Button onClick={removeStorage} className={cerrarsesion}> Cerrar sesión</Button>
                     : <ButtonLink src="login"> Inicia Sesion</ButtonLink>
                 }
-
             </header>
 
             {children}

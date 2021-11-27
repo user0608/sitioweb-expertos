@@ -1,39 +1,65 @@
-import { useHistory } from 'react-router-dom';
+import { useHistory  } from 'react-router-dom';
 import useForm from '../hook/useForm';
-import { postData } from '../service/login';
+import {useToken} from '../hook/useToken';
 
-export const Login = () => {
+import { postData } from '../service/login';
+import {useState,useEffect} from 'react'
+const Login = ()  => {
+    const [responseServer, setResponseServer] = useState("")
     const history = useHistory();
-    console.log(history)
+    console.log("useHistory", history)
+
+    const k =  useToken();
     const [form, handlerChange, reset] = useForm({
         username: "",
         password: ""
     })
-    const onSubmit = async (e) => {
+
+    const handleSubmit = async (e) => {
         e.preventDefault()
+        setResponseServer("enviando datos")
         if (form.username.length > 6 && form.password.length > 6) {
             let response = await postData(form, "login")
-            console.log(response)
+            /* await setResponseServer(response) */
+            await console.log(response)
             if (response.code === "OK") {
                 localStorage.setItem("token", response.token)
                 localStorage.setItem("usuario_id", response.usuario.estudiante_id)
                 localStorage.setItem("usuario", JSON.stringify(response.usuario))
-                history.push("/")
+                history.push("/home")
             }
 
         } else {
             alert("datos Incorrectos")
             reset()
+            e.target.submit()
         }
-        e.target.submit()
     }
+
+    const redirectToHome=()=>{
+        if (k) {
+            console.log("vaya al inicio")
+            history.push("/")
+        }else{
+            console.log("que pasa",k);
+        }
+    }
+    useEffect(() => {
+        console.log(responseServer)
+    }, [responseServer])
+    useEffect(() => {
+        redirectToHome()
+    }, [k])
+
     return (
         <div className="container">
             <div className="row mt-5">
-                <div className="col-4"></div>
+                <div className="col-4">
+                    {(responseServer)?responseServer:"no hay respuesta"}
+                </div>
                 <div className="col-4">
                     <h1 className="text-center">Login</h1>
-                    <form className="mt-5" onSubmit={onSubmit} >
+                    <form className="mt-5" onSubmit={handleSubmit} >
                         <div className="mb-3">
                             <label className="form-label">Username</label>
                             <input
@@ -55,13 +81,16 @@ export const Login = () => {
                                 id="exampleInputPassword1" />
                         </div>
                         <div className="d-flex justify-content-end">
-                            <button type="submit" className="btn btn-primary" >Iniciar</button>
+                            <input  className="btn btn-primary" type="submit" value="Enviar datos" />
                         </div>
                     </form>
                 </div>
-                <div className="col-4"></div>
+                <div className="col-4">
+                    token:{k?k:"no hay toekn"}
+                </div>
             </div>
         </div>
     )
 }
 
+export default Login;
