@@ -9,13 +9,12 @@ import { useEffect } from 'react';
 import { header, username,cerrarsesion } from "./layout.module.css"
 
 const Layout = ({ children }) => {
-    const k = useToken();
-    const {isLogged,logout} = useUser();
+
+    const {isLogged,logout,user} = useUser();
     const navigate = useNavigate ();    
 
     const removeStorage = () =>{
         logout()
-
         navigate("/login")
     }
 
@@ -25,7 +24,7 @@ const Layout = ({ children }) => {
 
     useEffect(() => {
 
-    }, [k])
+    }, [user])
 
     return (
         <>
@@ -33,12 +32,12 @@ const Layout = ({ children }) => {
                 <Link className="" to="/" >
                     <img src="/logo64.png" />
                 </Link>
-{/*                 {k?k:"no hay token"}
-                {   u &&
+{/*                 {k?k:"no hay token"}*/}
+                {   isLogged &&
                         <span className={username}>
-                            {u?.nombre} {u?.apellido_paterno} {u?.apellido_materno}
+                            {user?.nombre} {user?.apellido_paterno} {user?.apellido_materno}
                         </span>
-                } */}
+                } 
                 {isLogged
                     ? <Button onClick={removeStorage} className={cerrarsesion}> Cerrar sesión</Button>
                     : <ButtonLink src="login"> Inicia Sesion</ButtonLink>

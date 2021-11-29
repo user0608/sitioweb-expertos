@@ -17,25 +17,11 @@ import {UserContextProvider} from "./context/UserContext";
 
 
 const App = () => {
-  const token = useToken();
+/*   const token = useToken();
 
-  /* const navigate = useNavigate();
-  console.log("useHistory", navigate) */
   useEffect(() => {
-
-
   }, [token])
-
-  /* if (!token) {
-    return (
-      <Router>
-        <Routes>
-          <Route path="/login2" element={< Login />} />
-        </Routes>
-      </Router>
-    )
-  } */
-
+ */
   return (
 <UserContextProvider>
     <Router>

@@ -1,10 +1,10 @@
 import Context from '../context/UserContext'
-import { useCallback, useContext, useEffect, useState } from "react"
+import { useCallback, useContext, useState } from "react"
 import { postData } from '../service/login'
 
 const useUser = () => {
 
-    const { jwt, setJWT } = useContext(Context)
+    const { jwt, setJWT, user } = useContext(Context)
     const [loginLoadingAndError, setLoginLoadingAndError] = useState({
         loading:false,
         error:false
@@ -29,8 +29,6 @@ const useUser = () => {
             .catch(err => {
                 console.log(err)
             })
-
-
     }, [setJWT])
 
     const logout = useCallback(() => {
@@ -45,7 +43,8 @@ const useUser = () => {
         login,
         logout,
         isLoginLoading: loginLoadingAndError.loading,
-        hasLoginError: loginLoadingAndError.error
+        hasLoginError: loginLoadingAndError.error,
+        user
     }
 }
 export default useUser
