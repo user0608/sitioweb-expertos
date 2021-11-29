@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react"
 import { GetData } from "../service/getData"
 import { useParams } from "react-router-dom";
+import toast, { Toaster } from 'react-hot-toast';
+
+
 const CASM = {
     CCFM: "Ciencias físicas matemáticas",
     CCSS: "Ciencias sociales",
@@ -19,8 +22,8 @@ const Resultados = () => {
     const [res, setResultados] = useState()
     const LoadData = async () => {
         const r = await GetData(`test/${param.test_id}/resultado`)
-        if (r.code != "OK") {
-            alert("Algo paso")
+        if (r.code !== "OK") {
+            toast.error("Los datos no se han podido obtener")
             return
         }
         setResultados(r.data)
@@ -32,11 +35,16 @@ const Resultados = () => {
         return (
             <div className="container">
                 <h4>Cargando Resultados ...</h4>
+                <Toaster
+                    position="bottom-center"
+                    reverseOrder={false}
+                />
             </div>
         )
     } else {
         return (
             <div className="container">
+
                 <div className="mb-5">
                     <p className="display-4 text-center">Resumen de resultados</p>
                 </div>
