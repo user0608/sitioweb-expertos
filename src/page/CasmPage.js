@@ -49,16 +49,18 @@ export const CasmPage = () => {
     }
     useEffect(() => {
         LoadQuestions()
+        document.body.scrollTop = 0; // For Safari
+        document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
     }, [pagina])
     const setPage = (p) => {
         setPagina(p)
     }
     return (
-        <div>
+        <div className="container">
             <h1 className="text-center mb-3">TEST CASM 83 Revisión del 2010</h1>
             <div><p className="text-center">Pagina actual {pagina}</p></div>
-            {Paginas(setPage)}
-            <div>
+            {Paginas(setPage,pagina)}
+            <div className="container">
                 {
                     preguntas?.map(p => (
                         <CasmQuestion
@@ -74,26 +76,37 @@ export const CasmPage = () => {
                     ))
                 }
             </div>
-            <div className="p-5 d-flex justify-content-center me-5">
+            <div className="p-5 d-flex justify-content-center ">
                 <button className="btn btn-primary btn-bg" onClick={saveAs}>Guardar Respuestas</button>
             </div>
+            {Paginas(setPage,pagina)}
+            <br/>
+            <br/>
         </div>
     )
 }
 
-const Paginas = (setPage) => (
-    <div className="d-flex justify-content-center">
-        <button className="m-1 btn btn-secondary" onClick={() => setPage(1)} >1</button>
-        <button className="m-1 btn btn-secondary" onClick={() => setPage(2)} >2</button>
-        <button className="m-1 btn btn-secondary" onClick={() => setPage(3)} >3</button>
-        <button className="m-1 btn btn-secondary" onClick={() => setPage(4)} >4</button>
-        <button className="m-1 btn btn-secondary" onClick={() => setPage(5)} >5</button>
-        <button className="m-1 btn btn-secondary" onClick={() => setPage(6)} >6</button>
-        <button className="m-1 btn btn-secondary" onClick={() => setPage(7)} >7</button>
-        <button className="m-1 btn btn-secondary" onClick={() => setPage(8)} >8</button>
-        <button className="m-1 btn btn-secondary" onClick={() => setPage(9)} >9</button>
-        <button className="m-1 btn btn-secondary" onClick={() => setPage(10)} >10</button>
-    </div>
+const Paginas = (setPage,pagina) => (
+    <nav aria-label="Page navigation example"  className="d-flex justify-content-center">
+        <ul className="pagination ">
+            <li className="page-item" onClick={() => setPage(pagina<=1 ? 1 : pagina-1 )}>
+                <button className="page-link">{"<<"}</button>
+            </li>
+            <li className="page-item"><button className="page-link" onClick={() => setPage(1)}>1</button></li>
+            <li className="page-item"><button className="page-link" onClick={() => setPage(2)}>2</button></li>
+            <li className="page-item"><button className="page-link" onClick={() => setPage(3)}>3</button></li>
+            <li className="page-item"><button className="page-link" onClick={() => setPage(4)}>4</button></li>
+            <li className="page-item"><button className="page-link" onClick={() => setPage(5)}>5</button></li>
+            <li className="page-item"><button className="page-link" onClick={() => setPage(6)}>6</button></li>
+            <li className="page-item"><button className="page-link" onClick={() => setPage(7)}>7</button></li>
+            <li className="page-item"><button className="page-link" onClick={() => setPage(8)}>8</button></li>
+            <li className="page-item"><button className="page-link" onClick={() => setPage(9)}>9</button></li>
+            <li className="page-item"><button className="page-link" onClick={() => setPage(10)}>10</button></li>
+            <li className="page-item" onClick={() => setPage(pagina>=10 ? 10 : pagina+1 )}>
+                <button className="page-link" >{">>"}</button>
+            </li>
+        </ul>
+    </nav>
 )
 
 

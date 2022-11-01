@@ -1,5 +1,5 @@
 import { API_URL } from './globals'
-export const postDataAPelo = async (data, path) => {
+export const postData = async (data, path) => {
   const response = await fetch(`${API_URL}/${path}`, {
     method: 'POST',
     headers: {

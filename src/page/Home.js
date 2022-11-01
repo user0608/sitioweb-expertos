@@ -2,9 +2,12 @@ import { useEffect, useState } from 'react';
 import { deleteData } from '../service/deleteData';
 import { GetData } from '../service/getData';
 import { Link } from "react-router-dom";
+import '../css/global.css'
+import Button from '../components/Button';
+import ButtonLink from '../components/ButtonLink';
 export const Home = () => {
     const [user, setUser] = useState()
-    let u = JSON.parse(localStorage.getItem("usuario"))
+    
     const loadData = async () => {
         let data = await GetData("prueba")
         if (data.code != "OK") {
@@ -49,24 +52,21 @@ export const Home = () => {
     }, [])
     return (
         <div className="container">
-            <div >
-                <p className="text-end">
-                    <span className="h6 me-3">Usuario:</span>
-                    {u?.nombre} {u?.apellido_paterno} {u?.apellido_materno}
-                </p>
+            
+            <div className="container-image">
+                <img max-height="200"  src="/banner.png" />
             </div>
-            <div>
-                <h1></h1>
-                <img height="200" src="/banner.png" />
-            </div>
-            <div className="d-flex justify-content-end">
-                <button
-                    className="me-2"
+            <h1>
+                SISTEMA EXPERTO PARA EL COLEGIO CONSUELO SOLANO DE VILLON 80880
+            </h1>
+            <div className="d-flex justify-content-end mb-4">
+                <Button
+                    className="mb-2"
                     onClick={onCrearTest}
-                >Crear nuevo test</button>
+                >Crear nuevo test</Button>
             </div>
-            <div>
-                <table className="table">
+            <div class="table-responsive-md">
+                <table className="table table table-sm">
                     <thead>
                         <tr>
                             <th scope="col">ID</th>
@@ -86,17 +86,17 @@ export const Home = () => {
                                     <td>{u.created_at}</td>
                                     <td>
                                         {!u.resultado_casm &&
-                                            <Link to={`test/${u.test_id}/casm`}>Start</Link>
+                                            <ButtonLink src={`test/${u.test_id}/casm`}>Start</ButtonLink>
                                         }
                                     </td>
                                     <td>
                                         {!u.resultado_berger &&
-                                            <Link to={`test/${u.test_id}/berger`}>Start</Link>
+                                            <ButtonLink src={`test/${u.test_id}/berger`}>Start</ButtonLink>
                                         }
                                     </td>
                                     <td>
                                         {!u.resultado_hea &&
-                                            <Link to={`test/${u.test_id}/hea`}>Start</Link>
+                                            <ButtonLink src={`test/${u.test_id}/hea`}>Start</ButtonLink>
                                         }
                                     </td>
                                     {u.done ?

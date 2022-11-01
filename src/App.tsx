@@ -1,58 +1,44 @@
 import {
   BrowserRouter as Router,
-  Switch,
+  Routes,
   Route,
-  Link
+  useNavigate
 } from "react-router-dom";
 import { useToken } from "./hook/useToken";
-import { Login } from './page/Login';
+import Login from './page/Login';
 import { Home } from './page/Home';
 import { CasmPage } from "./page/CasmPage";
 import { BergerPage } from "./page/BergerPage";
 import { HeaPage } from "./page/HeaPage";
 import Resultados from "./page/Resultados";
+import Layout from "./containers/Layout/index";
+import { useEffect } from "react";
+import {UserContextProvider} from "./context/UserContext";
+
 
 const App = () => {
-  const token = useToken()
-  if (token) {
-    return WebPage()
-  } else {
-    return LoginPage()
-  }
-}
-const WebPage = () => {
+/*   const token = useToken();
 
+  useEffect(() => {
+  }, [token])
+ */
   return (
+<UserContextProvider>
     <Router>
-      <div className="ms-5">
-        <Link className="ms-5 nav-link h4" to="/home">Home</Link>
-      </div>
-      <div>
-        <Switch>
-          <Route path="/home">
-            < Home />
-          </Route>
-          <Route path="/test/:test_id/casm">
-            < CasmPage />
-          </Route>
-          <Route path="/test/:test_id/berger">
-            < BergerPage />
-          </Route>
-          <Route path="/test/:test_id/hea">
-            < HeaPage />
-          </Route>
-          <Route path="/resultado/:test_id">
-            < Resultados />
-          </Route>
-        </Switch>
-      </div>
+      <Layout>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="login" element={< Login />} />
+          <Route path="test/:test_id/casm" element={< CasmPage />} />
+          <Route path="test/:test_id/berger" element={< BergerPage />} />
+          <Route path="test/:test_id/hea" element={< HeaPage />} />
+          <Route path="resultado/:test_id" element={< Resultados />} />
+        </Routes>
+      </Layout>
     </Router>
+</UserContextProvider>
   );
 }
-const LoginPage = () => {
-  return (
-    <Login />
-  )
-}
+
 
 export default App
